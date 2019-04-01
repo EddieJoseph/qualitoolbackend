@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: Qualitoolbackend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/qualitool
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: keystore.p12
+    key-store-password: w0fx-lhHIvUnMsPZWsKXhrwd
+    key-store-type: PKCS12
+    key-alias: tomcat
