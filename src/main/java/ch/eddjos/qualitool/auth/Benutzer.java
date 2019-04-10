@@ -15,6 +15,19 @@ public class Benutzer {
     @Column(unique = true)
     private String nickname;
 
+    @Override
+    public String toString() {
+        return "Benutzer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", ip='" + ip + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

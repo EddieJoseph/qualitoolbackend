@@ -9,4 +9,18 @@ public class CommentDTO {
     public int blockId;
     public String blockName;
     public int checkboxId;
+
+    @Override
+    public String toString() {
+        return "CommentDTO{" +
+                "commentId=" + commentId +
+                ", authorId=" + authorId +
+                ", authorName='" + authorName + '\'' +
+                ", personId=" + personId +
+                ", text='" + text + '\'' +
+                ", blockId=" + blockId +
+                ", blockName='" + blockName + '\'' +
+                ", checkboxId=" + checkboxId +
+                '}';
+    }
 }

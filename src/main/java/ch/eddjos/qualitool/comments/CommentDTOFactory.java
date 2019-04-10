@@ -41,14 +41,31 @@ public class CommentDTOFactory {
         comments.forEach(c->list.add(create(c)));
         return list;
     }
-    public Comment unwrap(CommentDTO dto, Benutzer user){
+    public Comment unwrap(CommentDTO dto/*, Benutzer user*/){
         Comment comment = new Comment();
         comment.setText(dto.text);
         comment.setBlock(blockRepo.findById(dto.blockId).get());
         comment.setCheckbox(checkboxRepo.findById(dto.checkboxId).get());
         comment.setPerson(personRepo.getOne(dto.personId));
-        comment.setUser(user);
+        comment.setUser(userRepo.findById(dto.authorId).get());
         return comment;
+    }
+    public BlockDTO create(Block block){
+        BlockDTO dto=new BlockDTO();
+        dto.value=block.getId();
+        dto.label=block.getName();
+        return dto;
+    }
+    public Block unwrap(BlockDTO dto){
+        Block block=new Block();
+        block.setId(dto.value);
+        block.setName(dto.label);
+        return block;
+    }
 
+    public List<BlockDTO> createBL(List<Block> blocks){
+        ArrayList<BlockDTO> list=new ArrayList<>();
+        blocks.forEach(b->list.add(create(b)));
+        return list;
     }
 }

@@ -7,7 +7,7 @@ import ch.eddjos.qualitool.person.Person;
 import javax.persistence.*;
 
 @Entity
-public class Comment {
+public class Comment implements Comparable<Comment>{
     @Id
     @GeneratedValue
     int id;
@@ -19,6 +19,19 @@ public class Comment {
     Block block;
     @ManyToOne
     Person person;
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", user=" + user +
+                ", block=" + block +
+                ", person=" + person +
+                ", checkbox=" + checkbox +
+                '}';
+    }
+
     @ManyToOne
     Checkbox checkbox;
 
@@ -71,4 +84,8 @@ public class Comment {
     }
 
 
+    @Override
+    public int compareTo(Comment o) {
+        return this.id-o.id;
+    }
 }

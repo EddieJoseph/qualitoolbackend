@@ -8,6 +8,20 @@ import java.util.List;
 @Entity
 @Table
 public class Checkbox {
+  /*  @Override
+    public String toString() {
+        return "Checkbox{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", level=" + level +
+                ", severity=" + severity +
+                ", minimumachieved=" + minimumachieved +
+                ", parent=" + parent +
+                ", boxes=" + boxes +
+                '}';
+    }*/
+
     @Id
     @GeneratedValue
     private int id;

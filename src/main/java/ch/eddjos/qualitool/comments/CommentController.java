@@ -5,6 +5,9 @@ import ch.eddjos.qualitool.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -20,12 +23,17 @@ public class CommentController {
 
     @GetMapping("/{pid}/{cid}")
     public List<CommentDTO> getComments(@PathVariable("pid") int personid, @PathVariable("cid") int checkboxId){
-        return dtoFactory.create(service.findByPersonAndCheckbox(personid,checkboxId));
+        List<Comment> list=service.findByPersonAndCheckboxComplete(personid,checkboxId);
+        Collections.sort(list);
+        return dtoFactory.create(list);
     }
 
+    @Transactional
     @PostMapping
     public CommentDTO save(@RequestBody CommentDTO dto,@RequestHeader("token") String token){
-        Comment comment=dtoFactory.unwrap(dto,autService.check(token));
+        dto.authorId=autService.check(token).getId();
+        System.out.println(dto);
+        Comment comment=dtoFactory.unwrap(dto);
         return dtoFactory.create(service.insert(comment));
     }
 

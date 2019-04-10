@@ -15,6 +15,18 @@ public class PersonalCheckbox {
     @Id
     PersonalCheckboxId id;
     private boolean positiv;
+
+    @Override
+    public String toString() {
+        return "PersonalCheckbox{" +
+                "id=" + id +
+                ", positiv=" + positiv +
+                ", negativ=" + negativ +
+                ", sighted=" + sighted +
+                ", passed=" + passed +
+                '}';
+    }
+
     private boolean negativ;
     private boolean sighted;
     private Boolean passed;

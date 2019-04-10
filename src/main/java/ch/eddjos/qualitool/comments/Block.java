@@ -11,6 +11,14 @@ public class Block {
     @Column(unique = true)
     String name;
 
+    @Override
+    public String toString() {
+        return "Block{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
