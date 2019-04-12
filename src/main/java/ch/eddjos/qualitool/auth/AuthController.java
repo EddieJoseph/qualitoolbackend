@@ -19,10 +19,11 @@ public class AuthController {
     @PostMapping(value="/login",produces = "application/json")
     public Object login(@RequestHeader("username") String username,@RequestHeader("password") String password){
         Benutzer user=autService.login(username,password);
-        logger.info("Login {}, {}",username, password);
         if(user==null){
+            logger.info("Login atempt from {}, {}",username, password);
             return new ResponseEntity<>("Username or password incorrect.",HttpStatus.UNAUTHORIZED);
         }
+        logger.info("Sucessful login for {}",username);
         return user;
     }
 

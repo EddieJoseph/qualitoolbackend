@@ -4,6 +4,7 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.AuthenticationException;
 import javax.transaction.Transactional;
 
 @Service
@@ -55,6 +56,20 @@ public class AuthService {
             return user;
         }else{
             return null;
+        }
+    }
+
+    public Benutzer getAuthentication(String token) throws AuthenticationException{
+        if(token==null||token.length()<10){
+            throw new AuthenticationException("Not Authenticated");
+            //return null;
+        }
+        Benutzer user = repo.findBenutzerByTokenEquals(token);
+        if(user!=null){
+            return user;
+        }else{
+            throw new AuthenticationException("Not Authenticated");
+            //return null;
         }
     }
 

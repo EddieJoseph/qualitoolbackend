@@ -1,7 +1,13 @@
 package ch.eddjos.qualitool.person;
 
+import ch.eddjos.qualitool.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.naming.AuthenticationException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/person")
@@ -9,16 +15,36 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
     @Autowired
     PersonService personService;
+    @Autowired
+    AuthService autService;
+
     @GetMapping("/")
-    public Object getAll(){
-        return personService.getAll();
+    public ResponseEntity<List<Person>> getAll(@RequestHeader(value = "token",required = false) String token){
+        try {
+            autService.getAuthentication(token);
+        }catch(AuthenticationException e){
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+        return  new ResponseEntity(personService.getAll(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
-    public Object get(@PathVariable("id") int id){
-        return personService.get(id);
+    public ResponseEntity<Person> get(@PathVariable("id") int id,@RequestHeader(value = "token",required = false) String token){
+        try {
+            autService.getAuthentication(token);
+        }catch(AuthenticationException e){
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+        return  new ResponseEntity(personService.get(id), HttpStatus.OK);
     }
+
     @PutMapping
-    public Object put(@RequestBody Person p){
-        return personService.put(p);
+    public ResponseEntity<Person> put(@RequestBody Person p,@RequestHeader(value = "token",required = false) String token){
+        try {
+            autService.getAuthentication(token);
+        }catch(AuthenticationException e){
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity(personService.put(p), HttpStatus.OK);
     }
 }
