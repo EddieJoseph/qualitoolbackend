@@ -1,5 +1,7 @@
 package ch.eddjos.qualitool.auth;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +14,12 @@ public class AuthController {
     @Autowired
     AuthService autService;
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @PostMapping(value="/login",produces = "application/json")
     public Object login(@RequestHeader("username") String username,@RequestHeader("password") String password){
         Benutzer user=autService.login(username,password);
+        logger.info("Login {}, {}",username, password);
         if(user==null){
             return new ResponseEntity<>("Username or password incorrect.",HttpStatus.UNAUTHORIZED);
         }

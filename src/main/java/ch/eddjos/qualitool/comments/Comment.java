@@ -12,6 +12,7 @@ public class Comment implements Comparable<Comment>{
     @GeneratedValue
     int id;
 
+    @Column(columnDefinition = "TEXT")
     String text;
     @ManyToOne
     Benutzer user;
