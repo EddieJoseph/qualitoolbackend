@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/qualitool?useUnicode=true&characterEncoding=utf-8
     username: postgres
-    password: postgres
+    password: R16ydNMnGmczsgFYBJGB
 #    data: data.sql
     sql-script-encoding: UTF-8
   jpa:
@@ -23,7 +23,7 @@ spring:
 
 
 server:
-  port: 8080
+  port: 8082
 #  port: 8443
 #  ssl:
 #    enabled: true
