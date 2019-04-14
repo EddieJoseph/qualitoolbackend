@@ -34,6 +34,7 @@ public class CommentDTOFactory {
         dto.blockId=comment.getBlock().getId();
         dto.blockName=comment.getBlock().getName();
         dto.checkboxId=comment.getCheckbox().getId();
+        dto.stared=comment.isStared();
         return dto;
     }
     public List<CommentDTO> create(List<Comment> comments){
@@ -48,6 +49,7 @@ public class CommentDTOFactory {
         comment.setCheckbox(checkboxRepo.findById(dto.checkboxId).get());
         comment.setPerson(personRepo.getOne(dto.personId));
         comment.setUser(userRepo.findById(dto.authorId).get());
+        comment.setStared(false);
         return comment;
     }
     public BlockDTO create(Block block){

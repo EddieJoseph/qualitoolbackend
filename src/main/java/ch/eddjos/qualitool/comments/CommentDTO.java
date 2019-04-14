@@ -9,6 +9,7 @@ public class CommentDTO {
     public int blockId;
     public String blockName;
     public int checkboxId;
+    public boolean stared;
 
     @Override
     public String toString() {

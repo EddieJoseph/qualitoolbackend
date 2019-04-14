@@ -21,6 +21,16 @@ public class Comment implements Comparable<Comment>{
     @ManyToOne
     Person person;
 
+    boolean stared;
+
+    public boolean isStared() {
+        return stared;
+    }
+
+    public void setStared(boolean stared) {
+        this.stared = stared;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
