@@ -14,7 +14,7 @@ public class ExcelWriter {
 
     private Workbook workbook;
     private Sheet sheet;
-
+    private CellStyle textCellStyle;
     public ExcelWriter(String name){
         workbook=new XSSFWorkbook();
 
@@ -36,6 +36,9 @@ public class ExcelWriter {
             cell.setCellValue(columns[i]);
             cell.setCellStyle(headerCellStyle);
         }
+
+        textCellStyle = workbook.createCellStyle();
+        textCellStyle.setWrapText(true);
 
 
 
@@ -74,13 +77,19 @@ public class ExcelWriter {
         row.createCell(5).setCellValue(com.isStared());
         row.createCell(6).setCellValue(com.getBlock().getName());
         row.createCell(7).setCellValue(com.getUser().getNickname());
-        row.createCell(8).setCellValue(com.getText());
-
+        Cell cell=row.createCell(8);
+        cell.setCellValue(com.getText());
+        cell.setCellStyle(textCellStyle);
 
 
     }
 
     public byte[] create(){
+        for(int i = 0; i < columns.length-1; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        sheet.setColumnWidth(8, 20000);
+
         //InputStreamResource res=null;
         ByteArrayOutputStream bout=null;
         try {
