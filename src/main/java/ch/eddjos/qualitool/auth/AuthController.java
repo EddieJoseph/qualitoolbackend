@@ -14,6 +14,9 @@ public class AuthController {
     @Autowired
     AuthService autService;
 
+    @Autowired
+    BenutzerDTOFactory factory;
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @PostMapping(value="/login",produces = "application/json")
@@ -24,7 +27,7 @@ public class AuthController {
             return new ResponseEntity<>("Username or password incorrect.",HttpStatus.UNAUTHORIZED);
         }
         logger.info("Sucessful login for {}",username);
-        return user;
+        return factory.ctrate(user);
     }
 
     @PostMapping(value="/logout",produces = "application/json")
@@ -34,7 +37,7 @@ public class AuthController {
 
     @PostMapping(value="/check",produces = "application/json")
     public Object check(@RequestHeader("token") String token){
-        return autService.check(token);
+        return factory.ctrate(autService.check(token));
     }
 
 

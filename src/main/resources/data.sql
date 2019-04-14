@@ -261,6 +261,16 @@ INSERT INTO public.person (id, birthdate, firstname, groups, image_url, lastname
 
 
 
+INSERT INTO public.gruppe (id, name, type) VALUES (0, '1A', 'TNLBS');
+INSERT INTO public.gruppe_leaders (group_id, leaders_id) VALUES (0, 1);
+INSERT INTO public.gruppe_leaders (group_id, leaders_id) VALUES (0, 2);
+INSERT INTO public.gruppe_members (group_id, members_id) VALUES (0, 1);
+INSERT INTO public.gruppe_members (group_id, members_id) VALUES (0, 2);
+INSERT INTO public.gruppe_members (group_id, members_id) VALUES (0, 3);
+
+
+
+
 INSERT INTO public.personal_checkbox (checkbox_id, person_id, negativ, passed, positiv, sighted) VALUES (0, 1, false, NULL, false, false);
 INSERT INTO public.personal_checkbox (checkbox_id, person_id, negativ, passed, positiv, sighted) VALUES (1, 1, false, NULL, false, false);
 INSERT INTO public.personal_checkbox (checkbox_id, person_id, negativ, passed, positiv, sighted) VALUES (2, 1, false, NULL, false, false);

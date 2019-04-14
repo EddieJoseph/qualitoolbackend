@@ -17,6 +17,8 @@ public class PersonController {
     PersonService personService;
     @Autowired
     AuthService autService;
+    @Autowired
+    PersonDTOFactory factory;
 
     @GetMapping("/")
     public ResponseEntity<List<Person>> getAll(@RequestHeader(value = "token",required = false) String token){
@@ -35,7 +37,7 @@ public class PersonController {
         }catch(AuthenticationException e){
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
-        return  new ResponseEntity(personService.get(id), HttpStatus.OK);
+        return  new ResponseEntity(factory.create(personService.get(id)), HttpStatus.OK);
     }
 
     @PutMapping
@@ -45,6 +47,6 @@ public class PersonController {
         }catch(AuthenticationException e){
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity(personService.put(p), HttpStatus.OK);
+        return new ResponseEntity(factory.create(personService.put(p)), HttpStatus.OK);
     }
 }
