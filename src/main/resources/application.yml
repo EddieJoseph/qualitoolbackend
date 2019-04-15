@@ -22,11 +22,21 @@ spring:
           charSet: UTF-8
 
 
+
 server:
   port: 8082
-  contextPath: /qualitool-0.1.0
+  #contextPath: /qualitool-0.1.0
   servlet:
     context-path: /qualitool-0.1.0
+  http2:
+    enabled: true
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+
+
+
 #  port: 8443
 #  ssl:
 #    enabled: true
