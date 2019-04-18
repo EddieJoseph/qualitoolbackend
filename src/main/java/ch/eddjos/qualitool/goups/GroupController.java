@@ -17,7 +17,7 @@ public class GroupController {
     @Autowired
     AuthService autService;
     @GetMapping
-    public ResponseEntity<List<Group>> getAll(@PathVariable(value = "token",required = false) String token ){
+    public ResponseEntity<List<Group>> getAll(@RequestHeader(value = "token",required = false) String token ){
         try {
             autService.getAuthentication(token);
         }catch(AuthenticationException e){
@@ -26,7 +26,7 @@ public class GroupController {
         return new ResponseEntity(service.findAll(),HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<Group> create(@RequestBody GroupDTO dto, @PathVariable(value = "token",required = false) String token ){
+    public ResponseEntity<Group> create(@RequestBody GroupDTO dto, @RequestHeader(value = "token",required = false) String token ){
         try {
             autService.getAuthentication(token);
         }catch(AuthenticationException e){
@@ -36,7 +36,7 @@ public class GroupController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id")int id, @PathVariable(value = "token",required = false) String token ){
+    public ResponseEntity delete(@PathVariable("id")int id, @RequestHeader(value = "token",required = false) String token ){
         try {
             autService.getAuthentication(token);
         }catch(AuthenticationException e){
